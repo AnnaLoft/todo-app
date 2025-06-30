@@ -6,25 +6,23 @@ interface InputProps {
   onChange: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;
-  style?: React.CSSProperties;
 }
 
 export const Input: React.FC<InputProps> = ({
   value,
   onChange,
   placeholder,
-  disabled,
-  style,
+  disabled
 }) => {
+
   return (
     <input
-    className={`input ${styles.input}`}
+      className={`input ${styles.input}`}
       type="text"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
       disabled={disabled}
-      style={style}
     />
   );
 };

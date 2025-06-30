@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import styles from '../../style/filter.module.scss';
 
 interface FilterProps {
@@ -6,14 +7,17 @@ interface FilterProps {
   onChange: (filter: 'all' | 'completed' | 'active') => void;
 }
 
-export const Filter: React.FC<FilterProps> = ({ currentFilter, onChange }) => {
+export const Filter: React.FC<FilterProps> = observer(({ 
+  currentFilter,
+  onChange}) => {
+
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as 'all' | 'completed' | 'active';
     onChange(value);
   };
 
   return (
-    <div   className={`filter-container ${styles.container}`}>
+    <div className={`filter-container ${styles.container}`}>
       <label htmlFor="filter-select" className={`label ${styles.label}`}>Sort by:</label>
       <select
         id="filter-select"
@@ -27,4 +31,4 @@ export const Filter: React.FC<FilterProps> = ({ currentFilter, onChange }) => {
       </select>
     </div>
   );
-};
+});

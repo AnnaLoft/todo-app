@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import styles from '../../style/button.module.scss';
 
 interface ButtonProps {
@@ -7,10 +8,14 @@ interface ButtonProps {
   style?: React.CSSProperties;
 }
 
-export const Button: React.FC<ButtonProps> = ({ onClick, children, style }) => {
+export const Button: React.FC<ButtonProps> = observer(({ 
+  onClick, 
+  children, 
+  style }) => {
+    
   return (
-    <button  onClick={onClick} className={`button ${styles.button}`} style={style} >
+    <button onClick={onClick} className={`button ${styles.button}`} style={style}>
       {children}
     </button>
   );
-};
+});

@@ -1,6 +1,7 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import { TodoItem } from '../TodoItem';
-import { TodoItemComponent } from './TodoItem'
+import { TodoItemComponent } from './TodoItem';
 import styles from '../../style/todos.module.scss';
 
 interface TodoListProps {
@@ -10,12 +11,16 @@ interface TodoListProps {
   onDelete: (id: number) => void;
 }
 
-export const TodoList: React.FC<TodoListProps> = ({
-  todos,
-  onToggleComplete,
-  onRename,
-  onDelete,
-}) => {
+export const TodoList: React.FC<TodoListProps> = observer(({ 
+  todos, 
+  onToggleComplete, 
+  onRename, 
+  onDelete }) => {
+
+//     const handleToggle = (todo: TodoItem) => {
+//   todo.toggleCompleted();
+// };
+  
   return (
     <ul className={`ul ${styles.list}`}>
       {todos.map((todo) => (
@@ -28,5 +33,6 @@ export const TodoList: React.FC<TodoListProps> = ({
         />
       ))}
     </ul>
+    
   );
-};
+});
