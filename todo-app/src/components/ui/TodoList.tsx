@@ -10,7 +10,7 @@ interface TodoListProps {
   onDelete: (id: number) => void;
 }
 
-export const TodoList: React.FC<TodoListProps> = ({
+  export const TodoList: React.FC<TodoListProps> = React.memo(({
   todos,
   onToggleComplete,
   onRename,
@@ -20,6 +20,7 @@ export const TodoList: React.FC<TodoListProps> = ({
     <ul className={`ul ${styles.list}`}>
       {todos.map((todo) => (
         <TodoItemComponent
+
           key={todo.id}
           todo={todo}
           onToggleComplete={() => onToggleComplete(todo.id)}
@@ -29,4 +30,4 @@ export const TodoList: React.FC<TodoListProps> = ({
       ))}
     </ul>
   );
-};
+  });

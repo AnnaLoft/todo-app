@@ -4,13 +4,14 @@ import styles from '../../style/button.module.scss';
 interface ButtonProps {
   onClick: () => void;
   children: React.ReactNode;
-  style?: React.CSSProperties;
+
 }
 
-export const Button: React.FC<ButtonProps> = ({ onClick, children, style }) => {
+export const Button = React.memo(({ onClick, children }: ButtonProps) => {
+  console.log("button");
   return (
-    <button  onClick={onClick} className={`button ${styles.button}`} style={style} >
+    <button  onClick={onClick} className={`button ${styles.button}`}  >
       {children}
     </button>
   );
-};
+});

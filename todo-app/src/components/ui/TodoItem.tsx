@@ -11,7 +11,7 @@ interface TodoItemProps {
   onDelete: () => void;
 }
 
-export const TodoItemComponent: React.FC<TodoItemProps> = ({
+export const TodoItemComponent: React.FC<TodoItemProps> = React.memo(({
   todo,
   onToggleComplete,
   onRename,
@@ -28,9 +28,9 @@ export const TodoItemComponent: React.FC<TodoItemProps> = ({
         value={todo.title}
         onChange={(value) => onRename(value)}
       />
-      <Button style={{backgroundColor: 'gray', color: 'white'}} onClick={onDelete}>
+      <Button onClick={onDelete}>
         Delete
       </Button>
     </li>
   );
-};
+});

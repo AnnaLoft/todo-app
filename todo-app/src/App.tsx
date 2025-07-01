@@ -1,9 +1,11 @@
+
 import { useTodos } from './utils/useTodos';
 import { TodoList } from './components/ui/TodoList';
 import { Input } from './components/ui/Input';
 import { Button } from './components/ui/Button';
 import { Filter } from './components/ui/Filter';
 import styles from './style/app.module.scss';
+//import { useCallback } from 'react';
 
 function App() {
   const {
@@ -17,7 +19,18 @@ function App() {
     renameTodo,
     toggleComplete
   } = useTodos();
+  
+  // const handleToggleComplete = useCallback((id: number) => {
+  //   toggleComplete(id);
+  // }, [toggleComplete]);
 
+  // const handleRename = useCallback((id: number, newTitle: string) => {
+  //   renameTodo(id, newTitle);
+  // }, [renameTodo]);
+
+  // const handleDelete = useCallback((id: number) => {
+  //   deleteTodo(id);
+  // }, [deleteTodo]);
   
   const handleAdd = () => {
    
@@ -34,7 +47,7 @@ function App() {
         onChange={setNewTitle}
         placeholder="New task"
       />
-      <Button onClick={handleAdd} style={{ backgroundColor: 'green', color: 'white' }}>
+      <Button onClick={handleAdd}>
         Add task
       </Button>
       <Filter currentFilter={filter} onChange={setFilter} />
