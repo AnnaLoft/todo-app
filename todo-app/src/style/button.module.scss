@@ -1,0 +1,16 @@
+.button {
+     transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.02);}
+        width: max-content !important;
+    padding: 10px !important;
+    margin-left: 20px !important;
+    height: auto !important;
+    border-color: currentColor;
+    border-radius: 15px;
+   
+    cursor: pointer;
+
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
