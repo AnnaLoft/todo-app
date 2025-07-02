@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { TodoItem } from "../components/TodoItem";
 
 export function useTodos() {
@@ -6,16 +6,24 @@ export function useTodos() {
   const [newTitle, setNewTitle] = useState("");
 
   // ================== Создание записи ==================
-  const addTodo = (title: string) => {
-    const newTodo = new TodoItem(title);
-    setTodos((prev) => [...prev, newTodo]);
-  };
+  // const addTodo = (title: string) => {
+  //   const newTodo = new TodoItem(title);
+  //   setTodos((prev) => [...prev, newTodo]);
+  // };
 
-  const handleAddTodo = () => {
+  // const handleAddTodo = () => {
+  //   if (newTitle.trim()) {
+  //     addTodo(newTitle.trim());
+  //   }
+  // };
+    
+  const handleAddTodo = useCallback(() => {
     if (newTitle.trim()) {
-      addTodo(newTitle.trim());
+      const newTodo = new TodoItem(newTitle);
+    setTodos((prev) => [...prev, newTodo]);
+      setNewTitle('');
     }
-  };
+  },[newTitle, setNewTitle]);
 
   // ================== Удаление записи ==================
   const deleteTodo = (id: number) => {
@@ -46,16 +54,18 @@ export function useTodos() {
   // ================== Фильтр ==================
   const [filter, setFilter] = useState<"all" | "completed" | "active">("all");
 
-  const filteredTodos = todos.filter((todo) => {
-    if (filter === "all") return true;
-    if (filter === "completed") return todo.completed;
-    if (filter === "active") return !todo.completed;
-    return true;
-  });
+  const filteredTodos = useMemo(() => {
+    return todos.filter((todo) => {
+      if (filter === "all") return true;
+      if (filter === "completed") return todo.completed;
+      if (filter === "active") return !todo.completed;
+      return true;
+    });
+  }, [todos, filter]);
 
-  const handleFilterChange = (newFilter: "all" | "completed" | "active") => {
+  const handleFilterChange = useCallback((newFilter: "all" | "completed" | "active") => {
     setFilter(newFilter);
-  };
+  }, []);
 
   return {
     todos,
@@ -63,10 +73,12 @@ export function useTodos() {
     filter,
     setFilter: handleFilterChange,
     newTitle,
-    setNewTitle: handleSetNewTitle,
-    addTodo: handleAddTodo,
-    deleteTodo,
-    renameTodo,
-    toggleComplete,
+    // setNewTitle: handleSetNewTitle,
+    setNewTitle: useCallback(handleSetNewTitle, []),
+    //addTodo: handleAddTodo,
+    addTodo: useCallback(handleAddTodo, [handleAddTodo]),
+    deleteTodo: useCallback(deleteTodo, []),
+    renameTodo: useCallback(renameTodo, []),
+    toggleComplete: useCallback(toggleComplete, []),
   };
 }

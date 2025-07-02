@@ -6,10 +6,18 @@ import { Button } from './Button';
 
 interface TodoItemProps {
   todo: TodoItem;
-  onToggleComplete: () => void;
-  onRename: (newTitle: string) => void;
-  onDelete: () => void;
+  onToggleComplete: (id: number) => void;
+  onRename: (id: number, newTitle: string) => void;
+  onDelete: (id: number) => void;
 }
+
+const areEqual = (prevProps: TodoItemProps, nextProps: TodoItemProps) => {
+  return (
+    prevProps.todo.id === nextProps.todo.id &&
+    prevProps.todo.title === nextProps.todo.title &&
+    prevProps.todo.completed === nextProps.todo.completed
+  );
+};
 
 export const TodoItemComponent: React.FC<TodoItemProps> = React.memo(({
   todo,
@@ -17,20 +25,21 @@ export const TodoItemComponent: React.FC<TodoItemProps> = React.memo(({
   onRename,
   onDelete,
 }) => {
+  console.log('todoItem')
   return (
     <li className={`input ${styles.list}`}>
       <input
         type="checkbox"
         checked={todo.completed}
-        onChange={onToggleComplete}
+        onChange={() => onToggleComplete(todo.id)}
       />
       <Input
         value={todo.title}
-        onChange={(value) => onRename(value)}
+        onChange={(value) => onRename(todo.id, value)}
       />
-      <Button onClick={onDelete}>
+      <Button onClick={() => onDelete(todo.id)}>
         Delete
       </Button>
     </li>
   );
-});
+}, areEqual);

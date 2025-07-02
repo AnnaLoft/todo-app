@@ -16,16 +16,16 @@ interface TodoListProps {
   onRename,
   onDelete,
 }) => {
+  console.log('todoList')
   return (
     <ul className={`ul ${styles.list}`}>
       {todos.map((todo) => (
         <TodoItemComponent
-
           key={todo.id}
           todo={todo}
-          onToggleComplete={() => onToggleComplete(todo.id)}
-          onRename={(newTitle) => onRename(todo.id, newTitle)}
-          onDelete={() => onDelete(todo.id)}
+          onToggleComplete={onToggleComplete}
+          onRename={onRename}
+          onDelete={onDelete}
         />
       ))}
     </ul>

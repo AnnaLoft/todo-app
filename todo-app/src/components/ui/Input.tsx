@@ -9,13 +9,20 @@ interface InputProps {
   style?: React.CSSProperties;
 }
 
-export const Input: React.FC<InputProps> = ({
+const areEqual = (prevProps: InputProps, nextProps: InputProps) => {
+  return (
+    prevProps.value === nextProps.value 
+  );
+};
+
+export const Input: React.FC<InputProps>  = React.memo(({
   value,
   onChange,
   placeholder,
   disabled,
   style,
 }) => {
+  console.log('input')
   return (
     <input
     className={`input ${styles.input}`}
@@ -27,4 +34,4 @@ export const Input: React.FC<InputProps> = ({
       style={style}
     />
   );
-};
+},areEqual);

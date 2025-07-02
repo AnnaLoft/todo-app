@@ -4,7 +4,6 @@ import styles from '../../style/button.module.scss';
 interface ButtonProps {
   onClick: () => void;
   children: React.ReactNode;
-
 }
 
 export const Button = React.memo(({ onClick, children }: ButtonProps) => {

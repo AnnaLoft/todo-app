@@ -6,12 +6,12 @@ interface FilterProps {
   onChange: (filter: 'all' | 'completed' | 'active') => void;
 }
 
-export const Filter: React.FC<FilterProps> = ({ currentFilter, onChange }) => {
+export const Filter: React.FC<FilterProps> = React.memo(({ currentFilter, onChange }) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as 'all' | 'completed' | 'active';
     onChange(value);
   };
-
+console.log('filter')
   return (
     <div   className={`filter-container ${styles.container}`}>
       <label htmlFor="filter-select" className={`label ${styles.label}`}>Sort by:</label>
@@ -27,4 +27,4 @@ export const Filter: React.FC<FilterProps> = ({ currentFilter, onChange }) => {
       </select>
     </div>
   );
-};
+});
