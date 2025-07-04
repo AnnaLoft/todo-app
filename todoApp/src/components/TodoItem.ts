@@ -13,11 +13,4 @@ export class TodoItem {
     this.createdAt = createdAt ?? new Date();
     makeAutoObservable(this);
   }
-
-  cloneWithToggle(): TodoItem {
-    return {
-      ...this,
-      completed: !this.completed
-    };
-  }
 }
