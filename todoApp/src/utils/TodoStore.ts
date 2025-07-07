@@ -1,10 +1,11 @@
 import { makeAutoObservable, action, computed } from "mobx";
 import { TodoItem } from "../components/TodoItem";
+import { createContext } from "react";
 
 export class TodoStore {
   todos: TodoItem[] = [];
   filter: "all" | "completed" | "active" = "all";
-  newTitle: string = '';
+  newTitle: string = "";
 
   constructor() {
     makeAutoObservable(this, {
@@ -14,7 +15,7 @@ export class TodoStore {
       toggleComplete: action,
       setFilter: action,
       setNewTitle: action,
-      filteredTodos: computed
+      filteredTodos: computed,
     });
   }
 
@@ -30,15 +31,15 @@ export class TodoStore {
 
   // ================== Удаление записи ==================
   deleteTodo(id: number) {
-    const index = this.todos.findIndex(todo => todo.id === id);
+    const index = this.todos.findIndex((todo) => todo.id === id);
     if (index !== -1) {
       this.todos.splice(index, 1);
     }
   }
-  
+
   // ================== Измнение записи ==================
   renameTodo(id: number, newTitle: string) {
-    const todo = this.todos.find(todo => todo.id === id);
+    const todo = this.todos.find((todo) => todo.id === id);
     if (todo) {
       todo.title = newTitle.trim();
     }
@@ -48,9 +49,8 @@ export class TodoStore {
     this.newTitle = title;
   }
 
-  
   toggleComplete(id: number) {
-    const todo = this.todos.find(todo => todo.id === id);
+    const todo = this.todos.find((todo) => todo.id === id);
     if (todo) {
       todo.completed = !todo.completed;
     }
@@ -63,11 +63,13 @@ export class TodoStore {
   get filteredTodos() {
     switch (this.filter) {
       case "completed":
-        return this.todos.filter(todo => todo.completed);
+        return this.todos.filter((todo) => todo.completed);
       case "active":
-        return this.todos.filter(todo => !todo.completed);
+        return this.todos.filter((todo) => !todo.completed);
       default:
         return this.todos;
     }
   }
 }
+
+export const TodoContext = createContext<TodoStore>(new TodoStore());

@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable } from "mobx";
 
 export class TodoItem {
   readonly id: number;
@@ -17,7 +17,7 @@ export class TodoItem {
   cloneWithToggle(): TodoItem {
     return {
       ...this,
-      completed: !this.completed
+      completed: !this.completed,
     };
   }
 }

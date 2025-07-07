@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from '../../style/input.module.scss';
+import React from "react";
+import styles from "../../style/input.module.scss";
 
 interface InputProps {
   value: string;
@@ -16,8 +16,7 @@ export const Input: React.FC<InputProps> = ({
   disabled,
   style,
 }) => {
-
-  console.log('Input');
+  console.log("Input");
 
   return (
     <input

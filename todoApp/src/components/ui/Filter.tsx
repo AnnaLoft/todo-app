@@ -1,18 +1,17 @@
-import React from 'react';
-import { observer } from 'mobx-react-lite';
-import styles from '../../style/filter.module.scss';
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
+import styles from "../../style/filter.module.scss";
+import { TodoContext } from "../../utils/TodoStore";
 
-interface FilterProps {
-  currentFilter: 'all' | 'completed' | 'active';
-  onChange: (filter: 'all' | 'completed' | 'active') => void;
-}
+export const Filter = observer(() => {
+  const todoStore = useContext(TodoContext);
 
-export const Filter = observer(({ currentFilter, onChange }: FilterProps) => {
-  console.log('Filter');
+  const filterResults = (newFilter: "all" | "completed" | "active") =>
+    todoStore.setFilter(newFilter);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value as 'all' | 'completed' | 'active';
-    onChange(value);
+    const value = e.target.value as "all" | "completed" | "active";
+    filterResults(value);
   };
 
   return (
@@ -22,9 +21,10 @@ export const Filter = observer(({ currentFilter, onChange }: FilterProps) => {
       </label>
       <select
         id="filter-select"
-        value={currentFilter}
+        value={todoStore.filter}
         onChange={handleChange}
-        className={`select ${styles.select}`}>
+        className={`select ${styles.select}`}
+      >
         <option value="all">All</option>
         <option value="active">Active</option>
         <option value="completed">Completed</option>

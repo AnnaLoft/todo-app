@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from '../../style/button.module.scss';
-import { observer } from 'mobx-react-lite';
+import React from "react";
+import styles from "../../style/button.module.scss";
+import { observer } from "mobx-react-lite";
 
 interface ButtonProps {
   onClick: () => void;
@@ -9,12 +9,12 @@ interface ButtonProps {
 }
 
 export const Button = observer(({ onClick, children, style }: ButtonProps) => {
-  console.log('Button');
-  
+  console.log("Button");
+
   return (
-    <button  
-      onClick={onClick} 
-      className={`button ${styles.button}`}  
+    <button
+      onClick={onClick}
+      className={`button ${styles.button}`}
       style={style}
     >
       {children}
