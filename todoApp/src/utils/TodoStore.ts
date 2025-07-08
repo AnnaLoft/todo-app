@@ -1,4 +1,4 @@
-import { makeAutoObservable, action, computed } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { TodoItem } from "../components/TodoItem";
 import { createContext } from "react";
 
@@ -9,13 +9,6 @@ export class TodoStore {
 
   constructor() {
     makeAutoObservable(this, {
-      addTodo: action,
-      deleteTodo: action,
-      renameTodo: action,
-      toggleComplete: action,
-      setFilter: action,
-      setNewTitle: action,
-      filteredTodos: computed,
     });
   }
 
