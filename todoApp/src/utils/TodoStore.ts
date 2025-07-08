@@ -42,6 +42,7 @@ export class TodoStore {
     this.newTitle = title;
   }
 
+  // ================== Переключение статуса ==================
   toggleComplete(id: number) {
     const todo = this.todos.find((todo) => todo.id === id);
     if (todo) {
@@ -49,6 +50,7 @@ export class TodoStore {
     }
   }
 
+  // ================== Фильтр ==================
   setFilter(newFilter: "all" | "completed" | "active") {
     this.filter = newFilter;
   }
